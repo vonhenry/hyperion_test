@@ -2,3 +2,4 @@
 /chain/chain_data/*
 /chain/bins/*
 /chain/docker/chain_data/*
+/hosts/*

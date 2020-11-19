@@ -1,20 +1,37 @@
-version: '3.8'
-
+version: "3"
 services:
-
-  eosio-node:
-    container_name: nodeos
+  nodeosd:
     image: vchengsong/bos:v3.0.9
+    command: nodeos -e -p eosio
+      --data-dir /home/eosio/data/
+      --config-dir /home/eosio/config/
+      --plugin eosio::producer_plugin
+      --plugin eosio::producer_api_plugin
+      --plugin eosio::chain_api_plugin
+      --plugin eosio::http_plugin
+      --plugin eosio::state_history_plugin
+      --filter-on="*"
+      --chain-state-history
+      --trace-history
+      --state-history-endpoint=0.0.0.0:8003
+      --disable-replay-opts
+      --access-control-allow-origin='*'
+      --contracts-console
+      --max-transaction-time 1000
+      --http-validate-host=false
+      --http-server-address=0.0.0.0:8888
+      --chain-state-db-size-mb=4000
+      --abi-serializer-max-time-ms=10000
+      --verbose-http-errors
+    hostname: nodeosd
+    ontainer_name: nodeosd
+    restart: always
+    network_mode: host
+    environment:
+      - TZ=Asia/Shanghai
+      - I18N_LOCALE=zh-CN
     volumes:
       - ./chain_data/:/home/eosio/data/
       - ./../config/:/home/eosio/config/
-    ports:
-      - 8888:8888
-      - 8080:8080
-      - 9876:9876
-    command: nodeos -e -p eosio -d /home/eosio/data/ --config-dir /home/eosio/config/ --disable-replay-opts --trace-history --chain-state-history
-
-networks:
-  hyperion:
-    driver: bridge
-
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
