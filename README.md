@@ -24,3 +24,12 @@ deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted uni
 ```
 wegt https://mirrors.ustc.edu.cn/repogen/conf/ubuntu-https-4-bionic
 
+
+
+
+
+ netstat -an -ptcp | grep LISTEN
+ 
+ 
+ 
+ 
