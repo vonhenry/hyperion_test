@@ -24,7 +24,7 @@ services:
       --abi-serializer-max-time-ms=10000
       --verbose-http-errors
     hostname: nodeosd
-    ontainer_name: nodeosd
+    container_name: nodeosd
     restart: always
     network_mode: host
     environment:
