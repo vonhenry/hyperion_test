@@ -13,18 +13,19 @@ services:
       --filter-on="*"
       --chain-state-history
       --trace-history
-      --state-history-endpoint=0.0.0.0:8003
+      --state-history-endpoint=0.0.0.0:38080
       --disable-replay-opts
       --access-control-allow-origin='*'
       --contracts-console
       --max-transaction-time 1000
       --http-validate-host=false
-      --http-server-address=0.0.0.0:8888
+      --http-server-address=0.0.0.0:38888
       --chain-state-db-size-mb=4000
       --abi-serializer-max-time-ms=10000
       --verbose-http-errors
+      --p2p-listen-endpoint=0.0.0.0:39876
     hostname: nodeosd
-    container_name: nodeosd
+    container_name: nodeosd2
     restart: always
     network_mode: host
     environment:
