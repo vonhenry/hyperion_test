@@ -5,3 +5,10 @@
 /docker/chain_data_eos/*
 /docker/config_eos/protocol_features
 /hosts/*
+
+
+/hyperion/elasticsearch
+/hyperion/eosio/data
+/hyperion/hyperion
+/hyperion/rabbitmq
+/hyperion/scripts

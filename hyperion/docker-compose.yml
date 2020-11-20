@@ -31,7 +31,7 @@ services:
       - discovery.type=single-node
       - cluster.name=es-cluster
       - node.name=es01
-      - bootstrap.memory_lock=true
+      #- bootstrap.memory_lock=true
       - xpack.security.enabled=true
       - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
       - ELASTIC_USERNAME=elastic
@@ -59,17 +59,30 @@ services:
       - elasticsearch
 
   eosio-node:
-    container_name: eosio-node
-    image: eosrio/hyperion:eosio-2.0.5
+    container_name: nodeos_bos
+    image: vchengsong/bos:v3.0.9
     volumes:
       - ./eosio/data/:/home/eosio/data/
       - ./eosio/config/:/home/eosio/config/
-      - ./scripts/:/home/eosio/scripts/
     ports:
-      - 8888:8888
-    networks:
-      - hyperion
-    command: bash -c "/home/eosio/scripts/run-nodeos.sh ${SCRIPT:-false} ${SNAPSHOT:-""}"
+      - 0.0.0.0:8888:8888
+      - 0.0.0.0:8080:8080
+      - 0.0.0.0:9876:9876
+    command: nodeos -e -p eosio -d /home/eosio/data/ --config-dir /home/eosio/config/ --disable-replay-opts --trace-history --chain-state-history --filter-on="*"
+
+
+#  eosio-node:
+#    container_name: eosio-node
+#    image: vchengsong/bos:v3.0.9
+#    volumes:
+#      - ./eosio/data/:/home/eosio/data/
+#      - ./eosio/config/:/home/eosio/config/
+#      - ./scripts/:/home/eosio/scripts/
+#    ports:
+#      - 8888:8888
+#    networks:
+#      - hyperion
+#    command: bash -c "/home/eosio/scripts/run-nodeos.sh ${SCRIPT:-false} ${SNAPSHOT:-""}"
 
   hyperion-indexer:
     container_name: hyperion-indexer
@@ -87,7 +100,7 @@ services:
       - ./scripts/:/home/hyperion/scripts/
     networks:
       - hyperion
-    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} eos-indexer"
+    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} bos-indexer"
 
   hyperion-api:
     container_name: hyperion-api
@@ -104,7 +117,7 @@ services:
       - ./scripts/:/home/hyperion/scripts/
     networks:
       - hyperion
-    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} eos-api"
+    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} bos-api"
 
 networks:
   hyperion:
