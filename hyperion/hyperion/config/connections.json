@@ -1,0 +1,30 @@
+{
+  "amqp": {
+    "host": "127.0.0.1:5672",
+    "api": "127.0.0.1:15672",
+    "user": "username",
+    "pass": "password",
+    "vhost": "hyperion"
+  },
+  "elasticsearch": {
+    "protocol": "http",
+    "host": "127.0.0.1:9200",
+    "ingest_nodes": ["127.0.0.1:9200"],
+    "user": "elastic",
+    "pass": "password"
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": "6379"
+  },
+  "chains": {
+    "bos": {
+      "name": "EOS Mainnet",
+      "chain_id": "cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f",
+      "http": "http://127.0.0.1:8888",
+      "ship": "ws://127.0.0.1:8080",
+      "WS_ROUTER_PORT": 7001,
+      "WS_ROUTER_HOST": "127.0.0.1"
+    }
+  }
+}
