@@ -28,7 +28,7 @@ wegt https://mirrors.ustc.edu.cn/repogen/conf/ubuntu-https-4-bionic
 
 
 
- netstat -an -ptcp | grep LISTEN
+netstat -an -ptcp | grep LISTEN
  
  
  

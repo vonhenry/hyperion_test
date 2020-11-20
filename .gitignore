@@ -7,7 +7,9 @@
 /hosts/*
 
 
-/hyperion/elasticsearch
-/hyperion/eosio/data
-/hyperion/rabbitmq
-/hyperion/scripts
+/hyperion_env/elasticsearch
+/hyperion_env/eosio/data
+/hyperion_env/rabbitmq
+/hyperion_env/scripts
+
+

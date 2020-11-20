@@ -33,7 +33,8 @@ services:
       - node.name=es01
       #- bootstrap.memory_lock=true
       - xpack.security.enabled=true
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      #- "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - "ES_JAVA_OPTS=-Xms750m -Xmx750m"
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=password
     volumes:
@@ -83,41 +84,41 @@ services:
 #    networks:
 #      - hyperion
 #    command: bash -c "/home/eosio/scripts/run-nodeos.sh ${SCRIPT:-false} ${SNAPSHOT:-""}"
-
-  hyperion-indexer:
-    container_name: hyperion-indexer
-    image: eosrio/hyperion:hyperion-3.1.0-beta.3
-    restart: on-failure
-    depends_on:
-      - elasticsearch
-      - redis
-      - rabbitmq
-      - eosio-node
-    volumes:
-      - ./hyperion/config/connections.json:/hyperion-history-api/connections.json
-      - ./hyperion/config/ecosystem.config.js:/hyperion-history-api/ecosystem.config.js
-      - ./hyperion/config/chains/:/hyperion-history-api/chains/
-      - ./scripts/:/home/hyperion/scripts/
-    networks:
-      - hyperion
-    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} bos-indexer"
-
-  hyperion-api:
-    container_name: hyperion-api
-    image: eosrio/hyperion:hyperion-3.0
-    restart: on-failure
-    ports:
-      - 7000:7000
-    depends_on:
-      - hyperion-indexer
-    volumes:
-      - ./hyperion/config/connections.json:/hyperion-history-api/connections.json
-      - ./hyperion/config/ecosystem.config.js:/hyperion-history-api/ecosystem.config.js
-      - ./hyperion/config/chains/:/hyperion-history-api/chains/
-      - ./scripts/:/home/hyperion/scripts/
-    networks:
-      - hyperion
-    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} bos-api"
+#
+#  hyperion-indexer:
+#    container_name: hyperion-indexer
+#    image: eosrio/hyperion:hyperion-3.1.0-beta.3
+#    restart: on-failure
+#    depends_on:
+#      - elasticsearch
+#      - redis
+#      - rabbitmq
+#      - eosio-node
+#    volumes:
+#      - ./hyperion/config/connections.json:/hyperion-history-api/connections.json
+#      - ./hyperion/config/ecosystem.config.js:/hyperion-history-api/ecosystem.config.js
+#      - ./hyperion/config/chains/:/hyperion-history-api/chains/
+#      - ./scripts/:/home/hyperion/scripts/
+#    networks:
+#      - hyperion
+#    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} bos-indexer"
+#
+#  hyperion-api:
+#    container_name: hyperion-api
+#    image: eosrio/hyperion:hyperion-3.0
+#    restart: on-failure
+#    ports:
+#      - 7000:7000
+#    depends_on:
+#      - hyperion-indexer
+#    volumes:
+#      - ./hyperion/config/connections.json:/hyperion-history-api/connections.json
+#      - ./hyperion/config/ecosystem.config.js:/hyperion-history-api/ecosystem.config.js
+#      - ./hyperion/config/chains/:/hyperion-history-api/chains/
+#      - ./scripts/:/home/hyperion/scripts/
+#    networks:
+#      - hyperion
+#    command: bash -c "/home/hyperion/scripts/run-hyperion.sh ${SCRIPT:-false} bos-api"
 
 networks:
   hyperion:
