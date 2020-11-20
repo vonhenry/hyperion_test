@@ -1,5 +1,7 @@
 .idea
 /chain/chain_data/*
 /chain/bins/*
-/chain/docker/chain_data/*
+/docker/chain_data_bos/*
+/docker/chain_data_eos/*
+/docker/config_eos/protocol_features
 /hosts/*
