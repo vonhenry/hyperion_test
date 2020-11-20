@@ -11,7 +11,7 @@ services:
       - 0.0.0.0:8888:8888
       - 0.0.0.0:8080:8080
       - 0.0.0.0:9876:9876
-    command: nodeos -e -p eosio -d=/home/eosio/data/ --config-dir=/home/eosio/config/ --disable-replay-opts --trace-history --chain-state-history --filter-on="*"
+    command: nodeos -e -p eosio -d /home/eosio/data/ --config-dir /home/eosio/config/ --disable-replay-opts --trace-history --chain-state-history --filter-on="*"
 
 networks:
   hyperion:

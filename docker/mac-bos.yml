@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  eosio-node:
+    container_name: nodeos_bos
+    image: vchengsong/bos:v3.0.9
+    volumes:
+      - ./chain_data_bos/:/home/eosio/data/
+      - ./config_bos/:/home/eosio/config/
+    ports:
+      - 0.0.0.0:8888:8888
+      - 0.0.0.0:8080:8080
+      - 0.0.0.0:9876:9876
+    command: nodeos -e -p eosio -d /home/eosio/data/ --config-dir /home/eosio/config/ --disable-replay-opts --trace-history --chain-state-history --filter-on="*"
+
+networks:
+  hyperion:
+    driver: bridge
